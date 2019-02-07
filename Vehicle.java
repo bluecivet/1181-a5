@@ -10,7 +10,7 @@ abstract public class Vehicle
 
   //-------------------------------------------------
 
-    abstract public void draw();
+    abstract public void draw(Graphics2D g2);
 
     //-----------------------------------------------
 
@@ -18,7 +18,12 @@ abstract public class Vehicle
     {
         for(Vehicle a : arr)
         {
-            if(a == null || rect.intersects(a.rect))
+            if(a == null)
+            {
+                return false;
+            }
+
+            if(rect.intersects(a.rect))
             {
                 return true;
             }

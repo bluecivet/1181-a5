@@ -5,6 +5,9 @@ public class VehicleComponent extends JComponent
 {
     int numberOfCar;
     Vehicle[] cars;
+    public static final int screenWidth = 1400;
+    public static final int screenHeight = 800;
+
 
     //    contturctor
 
@@ -12,7 +15,28 @@ public class VehicleComponent extends JComponent
     {
         numberOfCar = getInput();
         cars = new Vehicle[numberOfCar];
+        initialCars(cars);
     }
+
+
+    //-----------------------------------------------------------------
+
+
+    public void paintComponent(Graphics g)
+    {
+        Graphics2D g2 = (Graphics2D) g;
+
+        for(Vehicle a : cars)
+        {
+            a.draw(g2);
+        }
+    }
+
+
+
+
+
+
 
     //-----------------------------------------------------------
     private int getInput()
@@ -58,9 +82,10 @@ public class VehicleComponent extends JComponent
     {
         int firstRandom = 1 + (int) (Math.random() * numberOfCar);
         int secondRandom = 1 + (int) (Math.random() * (numberOfCar - firstRandom));
-        int thirdRandom = numberOfCar - firstRandom - secondRandom;
 
         loadCar(0, firstRandom, arr);
+        loadBicyle(firstRandom,firstRandom + secondRandom, arr);
+        loadTruck(secondRandom + firstRandom, arr.length, arr);
 
     }
 
@@ -77,8 +102,8 @@ public class VehicleComponent extends JComponent
             do
              {
                 //get random position for the car
-                x = (int) (Math.random() * 1920);
-                y = (int) (Math.random() * 1080);
+                x = (int) (Math.random() * screenWidth);
+                y = (int) (Math.random() * screenHeight);
                 // create rectangle for checking overlapping
                 rect = new Rectangle(x, y, Car.width, Car.height);
              }
@@ -103,17 +128,44 @@ public class VehicleComponent extends JComponent
             do
              {
                 //get random position for the car
-                 x = (int) (Math.random() * 1920);
-                y = (int) (Math.random() * 1080);
+                 x = (int) (Math.random() * screenWidth);
+                y = (int) (Math.random() * screenHeight);
                 // create rectangle for checking overlapping
                 rect = new Rectangle(x, y, Bicyle.width, Bicyle.height);
               }
             while (Vehicle.checkOverLap(rect, arr));   // check overlapping
 
             //once not overlapping
-            arr[i] = new Car(x, y);
+            arr[i] = new Bicyle(x,y);
         }
 
     }
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    private void loadTruck(int start, int end, Vehicle[] arr)
+    {
+        Rectangle rect;
+        int x;
+        int y;
+
+        for (int i = start; i < end; i++)
+        {
+            do
+            {
+                //get random position for the car
+                x = (int) (Math.random() * screenWidth);
+                y = (int) (Math.random() * screenHeight);
+                // create rectangle for checking overlapping
+                rect = new Rectangle(x, y, Truck.width, Truck.height);
+            }
+            while (Vehicle.checkOverLap(rect, arr));   // check overlapping
+
+            //once not overlapping
+            arr[i] = new Truck(x,y);
+        }
+
+    }
+
 }
 
