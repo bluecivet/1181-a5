@@ -53,7 +53,7 @@ public class VehicleComponent extends JComponent
                     );
 
             if (validInput(userInput)) {
-                return Integer.parseInt(userInput);
+                return Integer.parseInt(userInput.trim());
             }
         }
         while (true);
@@ -63,25 +63,33 @@ public class VehicleComponent extends JComponent
 
     private boolean validInput(String input)
     {
-        input = input.trim();
+        boolean isAllEmpty = true;
+
+        if(input == null || input.equals(""))
+            return false;
 
         for (int i = 0; i < input.length(); i++)
         {
-            if (input.charAt(i) < '0' || input.charAt(i) > '9')
+            if ((input.charAt(i) < '0' || input.charAt(i) > '9') && input.charAt(i) != ' ')
             {
                 return false;
             }
+
+            if(input.charAt(i) != ' ')
+            {
+                isAllEmpty = false;
+            }
         }
 
-        return true;
+        return !isAllEmpty;
     }
 
     ////////////////////////////////////////////////////////////////////////
 
     private void initialCars(Vehicle[] arr)
     {
-        int firstRandom = 1 + (int) (Math.random() * numberOfCar);
-        int secondRandom = 1 + (int) (Math.random() * (numberOfCar - firstRandom));
+        int firstRandom = (int) (Math.random() * numberOfCar);
+        int secondRandom = (int) (Math.random() * (numberOfCar - firstRandom));
 
         loadCar(0, firstRandom, arr);
         loadBicyle(firstRandom,firstRandom + secondRandom, arr);
