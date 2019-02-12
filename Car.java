@@ -1,31 +1,73 @@
+/**
+
+ * File:        Car.java
+
+ * Author:      Zhilong Gan
+
+ * ID:          100331942
+
+ * Date:        2019.02.11
+
+ * class:       CPSC 1181-03
+
+ * instructor:  Hengameh Hamavand
+
+ * title        car class
+
+ * Compiler:    java JDK 10.2
+
+ */
+
+
 import java.awt.*;
 import java.awt.geom.*;
 public class Car extends Vehicle
 {
-    public static final int width = 100;
-    public static final int height = 50;
+    public static final int width = 100;   // define the width for the car 
+    public static final int height = 50;  // define the height for the car
+
+    ///-------------------------------------------------------------------------
+
+    /**
+     the this a construtor for the vehicle which doing nothing but just incase to compile and run
+    */
 
     Car()
     {
-
-
-
 
     }
 
     ////////////////////////////////////////////////////////////////
 
-    Car(int x, int y)
+    /**
+    *  the constructor will initial the field which define in the vehicle class
+    *  @param x the int type show the position x aix for the car
+    *  @param y the int type show the position y aix for the car
+    *  @param c the color type show the color for the car
+    */
+
+    Car(int x, int y, Color c)
     {
         super.x = x;
         super.y = y;
         super.width = Car.width;
         super.height = Car.height;
-        super.c = new Color((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
-        super.rect = new Rectangle(x,y,width,height);
+        super.c = c;
+        super.rect = new Rectangle(x,y,width,height);  // the boundary
     }
 
-    //------------------------------------------
+
+
+    //--------------------------------------------------------
+
+
+    /**
+    *  the mehtod over ride the method in Vehicle class
+    *  it will draw the shape which related to itselt
+    *  @param g2 a Graphics2D type which showu the drawing pen for the screen
+    */
+
+    @Override
 
     public void draw(Graphics2D g2)
     {
@@ -43,11 +85,13 @@ public class Car extends Vehicle
        Line2D.Double l1 = new Line2D.Double(p1,p2);
        Line2D.Double l2 = new Line2D.Double(p2,p3);
        Line2D.Double l3 = new Line2D.Double(p3,p4);
-
+       
+       // fill color
        g2.fill(body);
        g2.fill(wheel1);
        g2.fill(wheel2);
 
+       // draw the outter shape
        g2.setColor(Color.BLACK);
        g2.draw(body);
        g2.draw(wheel1);

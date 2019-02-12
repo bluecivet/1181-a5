@@ -1,3 +1,24 @@
+/**
+
+ * File:        Bicyle.java
+
+ * Author:      Zhilong Gan
+
+ * ID:          100331942
+
+ * Date:        2019.02.11
+
+ * class:       CPSC 1181-03
+
+ * instructor:  Hengameh Hamavand
+
+ * title        bicyle class
+
+ * Compiler:    java JDK 10.2
+
+ */
+
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -6,7 +27,10 @@ public class Bicyle extends Vehicle
     public static int width = 80;
     public static int height = 50;
 
+
+
     //  constructor
+    //----------------------------------------------------------------
 
     Bicyle()
     {
@@ -15,15 +39,32 @@ public class Bicyle extends Vehicle
 
     ///////////////////////////////////////////////////////
 
-    Bicyle(int x, int y)
+    /**
+    *  the constructor will initial the field which define in the vehicle class
+    *  @param x the int type show the position x aix for the bicyle
+    *  @param y the int type show the position y aix for the bicyle
+    *  @param c the color type show the color for the car
+    */
+
+    Bicyle(int x, int y, Color c)
     {
         super.x = x;
         super.y = y;
         super.width = Bicyle.width;
         super.height = Bicyle.height;
-        super.c = new Color((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+        super.c = c;
         super.rect = new Rectangle(x,y,width,height);
     }
+
+    //----------------------------------------------------------------------------
+
+    /**
+    *  the mehtod over ride the method in Vehicle class
+    *  it will draw the shape which related to itselt
+    *  @param g2 a Graphics2D type which showu the drawing pen for the screen
+    */
+
+    @Override
 
     public void draw(Graphics2D g2)
     {
@@ -41,11 +82,14 @@ public class Bicyle extends Vehicle
 
        Ellipse2D.Double wheel1 = new Ellipse2D.Double(x, y + height * 0.6, width >> 2, width >> 2);
        Ellipse2D.Double wheel2 = new Ellipse2D.Double(x + width * 0.7, y + height * 0.6, width >> 2, width >> 2);
-
+       
+       //draw outter shape
        g2.draw(body);
        g2.draw(head);
        g2.draw(l1);
        g2.draw(l2);
+
+       //fill color
        g2.fill(wheel1);
        g2.fill(wheel2);
        g2.setColor(Color.BLACK);
